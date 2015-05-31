@@ -6,10 +6,10 @@
 
     <title>
         
-            A New Beginning
+            Jumping Between Most Recently Used Files and Directories
         
     </title>
-    <meta name="description" content="Blog about web development, linux, vim, productivity and other interesting stuff">
+    <meta name="description" content="Using fzf &amp; neomru to quickly jump between most recently used files and directories">
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
@@ -38,8 +38,6 @@
     
 
 
-
-
 <header class="main-header post-head no-cover">
     <nav class="main-nav  clearfix">
         <a class="back-button icon-arrow-left" href="/">Home</a>
@@ -51,9 +49,18 @@
 
     <article class="post">
         <header class="post-header">
-            <h1 class="post-title">A New Beginning</h1>
+            <h1 class="post-title">Jumping Between Most Recently Used Files and Directories</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2015-05-23">23 May 2015</time>
+                <time class="post-date" datetime="2015-06-01">01 Jun 2015</time>
+                
+                    on
+                    
+                        <a href="/tag/vim">vim</a>,
+                    
+                        <a href="/tag/fzf">fzf</a>,
+                    
+                        <a href="/tag/productivity">productivity</a>
+                    
                 
 
                 <span class="pull-right">1 minute read</span>
@@ -61,7 +68,38 @@
         </header>
 
         <section class="post-content">
-            <p>This is my second attempt on blogging and this time most of the posts will be in english (need more practice with this, but I&#39;ll do my best).</p>
+            <p><a href="https://github.com/junegunn/fzf">fzf</a> is one of these life-changing tools that can boost your productivity. Here is example of using <em>fzf</em> with vim history for quickly (less than 500 ms) opening files and jumping between directories.</p>
+
+<p>Short demonstration:</p>
+
+<p><a href="https://asciinema.org/a/20862"><img src="https://asciinema.org/a/20862.png" alt="asciicast"></a></p>
+
+<p>What just happened? First, I jump to my dotfiles directory, then open i3wm config. <code>v</code> is a shortcut for jumping to files, <code>vd</code> - for jumping to dirs.</p>
+
+<p>Vim saves history of opened files in <code>.viminfo</code> but we are going futher.
+There is a great plugin for this - <a href="https://github.com/Shougo/neomru.vim">neomru</a>. It&#39;s written by <a href="https://github.com/Shougo">Shougo</a>, creator of <a href="https://github.com/Shougo/neocomplete.vim">neocomplete</a>, <a href="https://github.com/Shougo/unite.vim">unite</a> and many other useful plugins. <em>neomru</em> saves history for both files and directories. More than that, it will automatically remove invalid file paths from history.</p>
+
+<p>Install <em>neomru</em> with your favourite plugin manager: <code>Shougo/neomru.vim</code> It should work out of the box and saves history to <code>~/.cache/neomru/</code> by default.</p>
+
+<p>Add this to your bashrc (zshrc or whatever) file:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># v - search in most recent used files by vim</span>
+v<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local </span>file
+  <span class="nv">file</span><span class="o">=</span><span class="k">$(</span>sed <span class="s1">&#39;1d&#39;</span> <span class="nv">$HOME</span>/.cache/neomru/file <span class="p">|</span>
+          fzf --query<span class="o">=</span><span class="s2">&quot;$1&quot;</span> --select-1 --exit-0<span class="k">)</span>
+  <span class="o">[</span> -n <span class="s2">&quot;$file&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> vim <span class="nv">$file</span>
+<span class="o">}</span>
+
+<span class="c"># vd - cd to most recent used directory by vim</span>
+vd<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local </span>dir
+  <span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>sed <span class="s1">&#39;1d&#39;</span> <span class="nv">$HOME</span>/.cache/neomru/directory <span class="p">|</span>
+        fzf --query<span class="o">=</span><span class="s2">&quot;$1&quot;</span> --select-1 --exit-0<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="s2">&quot;$dir&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Collecting mru history takes some time, but soon you will be able to take full advantage of it.</p>
+
+<p>That&#39;s all the magic.</p>
 
         </section>
 
@@ -85,15 +123,15 @@
             <!-- Share links section -->
             <section class="share">
     <h4>Share this post</h4>
-    <a class="icon-twitter" href="http://twitter.com/share?text=A New Beginning&amp;url=https://zenbro.github.io/2015/05/23/a-new-beginning.html"
+    <a class="icon-twitter" href="http://twitter.com/share?text=Jumping Between Most Recently Used Files and Directories&amp;url=https://zenbro.github.io/2015/06/01/jumping-between-most-recently-used-files-and-directories.html"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <span class="hidden">Twitter</span>
     </a>
-    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/05/23/a-new-beginning.html"
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/06/01/jumping-between-most-recently-used-files-and-directories.html"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <span class="hidden">Facebook</span>
     </a>
-    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/05/23/a-new-beginning.html"
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/06/01/jumping-between-most-recently-used-files-and-directories.html"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <span class="hidden">Google+</span>
     </a>
@@ -105,7 +143,7 @@
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'zenbro';
-    var disqus_identifier = '/2015/05/23/a-new-beginning';
+    var disqus_identifier = '/2015/06/01/jumping-between-most-recently-used-files-and-directories';
 
     (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -8,7 +8,15 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Sun, 31 May 2015 23:32:38 +0300</pubDate>
+    <pubDate>Mon, 01 Jun 2015 01:42:44 +0300</pubDate>
+    <item>
+      <title>Jumping Between Most Recently Used Files and Directories</title>
+      <link>https://zenbro.github.io/2015/06/01/jumping-between-most-recently-used-files-and-directories.html</link>
+      <description>&lt;p&gt;&lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt; is one of these life-changing tools that can boost your productivity. Here is example of using &lt;em&gt;fzf&lt;/em&gt; with vim history for quickly (less than 500 ms) opening files and jumping between directories.&lt;/p&gt;
+</description>
+      <pubDate>Mon, 01 Jun 2015 01:42:44 +0300</pubDate>
+      <dc:date>2015-06-01T01:42:44+03:00</dc:date>
+    </item>
     <item>
       <title>Setup Review (2015#1)</title>
       <link>https://zenbro.github.io/2015/05/31/setup-review-2015-1.html</link>
@@ -34,6 +42,6 @@ We are going to use dmenu for input search queries and then instantly jump to th
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-05-31T23:32:38+03:00</dc:date>
+    <dc:date>2015-06-01T01:42:44+03:00</dc:date>
   </channel>
 </rss>
