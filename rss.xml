@@ -8,7 +8,15 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Sun, 24 May 2015 00:00:00 +0300</pubDate>
+    <pubDate>Sun, 31 May 2015 23:32:38 +0300</pubDate>
+    <item>
+      <title>Setup Review (2015#1)</title>
+      <link>https://zenbro.github.io/2015/05/31/setup-review-2015-1.html</link>
+      <description>&lt;p&gt;I will do these setup revisions at least two times in a year. It should help me to see all weak points in my tools and draw a roadmap for things that I want to improve in next few months. There will be some sort of to-do list for each tool.&lt;/p&gt;
+</description>
+      <pubDate>Sun, 31 May 2015 23:32:38 +0300</pubDate>
+      <dc:date>2015-05-31T23:32:38+03:00</dc:date>
+    </item>
     <item>
       <title>Searching the Web With Speed of Thought Using Dmenu</title>
       <link>https://zenbro.github.io/2015/05/24/searching-the-web-with-speed-of-thought-using-dmenu.html</link>
@@ -26,6 +34,6 @@ We are going to use dmenu for input search queries and then instantly jump to th
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-05-24T00:00:00+03:00</dc:date>
+    <dc:date>2015-05-31T23:32:38+03:00</dc:date>
   </channel>
 </rss>
