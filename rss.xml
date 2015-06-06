@@ -8,7 +8,15 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Mon, 01 Jun 2015 01:42:44 +0300</pubDate>
+    <pubDate>Sat, 06 Jun 2015 16:45:57 +0300</pubDate>
+    <item>
+      <title>Sending Page to Kindle From Vimperator</title>
+      <link>https://zenbro.github.io/2015/06/06/sending-page-to-kindle-from-vimperator.html</link>
+      <description>&lt;p&gt;Lets add new command for sending page to your Kindle via Vimperator console (it uses &lt;a href=&quot;http://fivefilters.org/&quot;&gt;fivefilters&lt;/a&gt; API):&lt;/p&gt;
+</description>
+      <pubDate>Sat, 06 Jun 2015 16:45:57 +0300</pubDate>
+      <dc:date>2015-06-06T16:45:57+03:00</dc:date>
+    </item>
     <item>
       <title>Jumping Between Most Recently Used Files and Directories</title>
       <link>https://zenbro.github.io/2015/06/01/jumping-between-most-recently-used-files-and-directories.html</link>
@@ -42,6 +50,6 @@ We are going to use dmenu for input search queries and then instantly jump to th
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-06-01T01:42:44+03:00</dc:date>
+    <dc:date>2015-06-06T16:45:57+03:00</dc:date>
   </channel>
 </rss>

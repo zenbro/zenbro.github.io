@@ -6,10 +6,10 @@
 
     <title>
         
-            Setup Review (2015#1)
+            Sending Page to Kindle From Vimperator
         
     </title>
-    <meta name="description" content="Roadmap for things that i want to improve in next few month.">
+    <meta name="description" content="Send currently opened page to kinde from vimperator console.">
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
@@ -38,6 +38,8 @@
     
 
 
+
+
 <header class="main-header post-head no-cover">
     <nav class="main-nav  clearfix">
         <a class="back-button icon-arrow-left" href="/">Home</a>
@@ -49,13 +51,13 @@
 
     <article class="post">
         <header class="post-header">
-            <h1 class="post-title">Setup Review (2015#1)</h1>
+            <h1 class="post-title">Sending Page to Kindle From Vimperator</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2015-05-31">31 May 2015</time>
+                <time class="post-date" datetime="2015-06-06">06 Jun 2015</time>
                 
                     on
                     
-                        <a href="/tag/productivity">productivity</a>
+                        <a href="/tag/vimperator">vimperator</a>
                     
                 
 
@@ -64,89 +66,10 @@
         </header>
 
         <section class="post-content">
-            <p>I will do these setup revisions at least two times in a year. It should help me to see all weak points in my tools and draw a roadmap for things that I want to improve in next few months. There will be some sort of to-do list for each tool.</p>
-
-<p><strong>Operating System:</strong> <em>ArchLinux</em></p>
-
-<ul>
-<li>Automate backups and updates</li>
-<li>Add dotfiles manager (need to chose one from <a href="http://dotfiles.github.io">here</a>)</li>
-</ul>
-
-<p><strong>Window Manager:</strong> <em>i3</em></p>
-
-<ul>
-<li>Try layout saving</li>
-<li>~~Rethinking key mappings that conflicts with <a href="http://www.bigsmoke.us/readline/shortcuts">readline hotkeys</a>~~</li>
-<li>Add <a href="https://wiki.archlinux.org/index.php/Compton">compton</a> configuration</li>
-</ul>
-
-<p><strong>Taskbar:</strong> <em>conky</em></p>
-
-<ul>
-<li>Add on-click events (e.g. opening calendar when clicking on date)</li>
-</ul>
-
-<p><strong>Command Shell:</strong> <em>zsh</em></p>
-
-<ul>
-<li>Add more environment-based shortcuts (e.g. git commands). Great source of inspiration is <a href="https://github.com/dotphiles/dotzsh">here</a>.</li>
-<li>Seems like I use quite a bit of z shell features - need to dig deeper into configuration.</li>
-<li>Add <a href="https://github.com/junegunn/fzf">fzf</a> support everywhere where it can be added</li>
-</ul>
-
-<p><strong>Terminal Emulator:</strong> <em>rxvt-unicode</em></p>
-
-<ul>
-<li>Mastering readline hotkeys after fixing i3wm key mappings.</li>
-<li>Rewrite <code>.Xdefaults</code> with full understanding of what I&#39;m doing.</li>
-</ul>
-
-<p><strong>File Manager:</strong> <em>ranger</em></p>
-
-<ul>
-<li>Add support for atool</li>
-<li>Improve configuration</li>
-</ul>
-
-<p><strong>Text Editor:</strong> <em>vim</em></p>
-
-<ul>
-<li>Add <a href="http://usevim.com/2015/05/27/reedes/">plugins for writing</a></li>
-<li>~~Add better clipboard management~~</li>
-<li>Improve <a href="https://github.com/Shougo/unite.vim">Unite</a> configuration</li>
-<li>Try to change <a href="https://github.com/jshint/jshint">jshint</a> to <a href="https://github.com/eslint/eslint">eslint</a></li>
-<li>Need to think of more consistent system for keymappings that starting with <code>&lt;leader&gt;</code>.</li>
-<li>Learn <a href="http://learnvimscriptthehardway.stevelosh.com/">vimscript</a></li>
-</ul>
-
-<p><strong>Main Web Browser:</strong> <em>firefox</em></p>
-
-<ul>
-<li>~~Change <a href="https://addons.mozilla.org/en-US/firefox/addon/vimfx/">VimFX</a> to <a href="http://www.vimperator.org/vimperator/">vimperator</a> and see what&#39;s happen~~</li>
-</ul>
-
-<p><strong>Secondary Web Browser (for development):</strong> <em>chromium</em></p>
-
-<p><strong>Email Client:</strong> <em>thunderbird</em></p>
-
-<p><strong>Instant Messaging Client:</strong> <em>pidgin</em></p>
-
-<p><strong>PDF/djvu Reader:</strong> <em>zathura</em></p>
-
-<p><strong>Image Viewer:</strong> <em>feh</em></p>
-
-<p><strong>Audio/Video Player:</strong> <em>vlc</em></p>
-
-<p><strong>BitTorrent Client:</strong> <em>transmission</em></p>
-
-<p><strong>Display Manager:</strong> <em>slim</em></p>
-
-<p><strong>Theme:</strong> <em>greybird</em></p>
-
-<p><strong>Icons:</strong> <em>elementary</em></p>
-
-<p>Looks like an <a href="https://bbs.archlinux.org/viewtopic.php?id=174764">average ArchLinux user setup</a>, but i love it. However, there are still a lot to improve.</p>
+            <p>Lets add new command for sending page to your Kindle via Vimperator console (it uses <a href="http://fivefilters.org/">fivefilters</a> API):</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim">command kindle :javascript openURL<span class="p">(</span><span class="s1">&#39;http://fivefilters.org/kindle-it/send.php?url=&#39;</span> <span class="p">+</span> encodeURI<span class="p">(</span>liberator.modules.buffer.URL<span class="p">))</span>
+</code></pre></div>
+<p>Add this line to your <em>.vimperatorrc</em>, open any page and type <code>:kindle</code></p>
 
         </section>
 
@@ -170,15 +93,15 @@
             <!-- Share links section -->
             <section class="share">
     <h4>Share this post</h4>
-    <a class="icon-twitter" href="http://twitter.com/share?text=Setup Review (2015#1)&amp;url=https://zenbro.github.io/2015/05/31/setup-review-2015-1.html"
+    <a class="icon-twitter" href="http://twitter.com/share?text=Sending Page to Kindle From Vimperator&amp;url=https://zenbro.github.io/2015/06/06/sending-page-to-kindle-from-vimperator.html"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <span class="hidden">Twitter</span>
     </a>
-    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/05/31/setup-review-2015-1.html"
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/06/06/sending-page-to-kindle-from-vimperator.html"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <span class="hidden">Facebook</span>
     </a>
-    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/05/31/setup-review-2015-1.html"
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/06/06/sending-page-to-kindle-from-vimperator.html"
        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <span class="hidden">Google+</span>
     </a>
@@ -190,7 +113,7 @@
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'zenbro';
-    var disqus_identifier = '/2015/05/31/setup-review-2015-1';
+    var disqus_identifier = '/2015/06/06/sending-page-to-kindle-from-vimperator';
 
     (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
