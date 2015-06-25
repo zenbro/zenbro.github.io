@@ -34,14 +34,6 @@
       <dc:date>2015-06-01T01:42:44+03:00</dc:date>
     </item>
     <item>
-      <title>Setup Review (2015#1)</title>
-      <link>https://zenbro.github.io/2015/05/31/setup-review-2015-1.html</link>
-      <description>&lt;p&gt;I will do these setup revisions at least two times in a year. It should help me to see all weak points in my tools and draw a roadmap for things that I want to improve in next few months. There will be some sort of to-do list for each tool.&lt;/p&gt;
-</description>
-      <pubDate>Sun, 31 May 2015 23:32:38 +0300</pubDate>
-      <dc:date>2015-05-31T23:32:38+03:00</dc:date>
-    </item>
-    <item>
       <title>Searching the Web With Speed of Thought Using Dmenu</title>
       <link>https://zenbro.github.io/2015/05/24/searching-the-web-with-speed-of-thought-using-dmenu.html</link>
       <description>&lt;p&gt;If you are using &lt;a href=&quot;http://i3wm.org:&quot;&gt;i3wm&lt;/a&gt;, you already should be familiar with &lt;a href=&quot;https://wiki.archlinux.org/index.php/Dmenu&quot;&gt;dmenu&lt;/a&gt;.
