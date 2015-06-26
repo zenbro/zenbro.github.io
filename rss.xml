@@ -8,7 +8,16 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Tue, 09 Jun 2015 07:16:41 +0300</pubDate>
+    <pubDate>Fri, 26 Jun 2015 11:55:40 +0300</pubDate>
+    <item>
+      <title>Review Last Commit With Vim and Fugitive</title>
+      <link>https://zenbro.github.io/2015/06/26/review-last-commit-with-vim-and-fugitive.html</link>
+      <description>&lt;p&gt;When working with git, it&amp;#39;s often useful to review all changes that you have
+made in last commit before push them to origin.&lt;/p&gt;
+</description>
+      <pubDate>Fri, 26 Jun 2015 11:55:40 +0300</pubDate>
+      <dc:date>2015-06-26T11:55:40+03:00</dc:date>
+    </item>
     <item>
       <title>Meditating on Code</title>
       <link>https://zenbro.github.io/2015/06/09/meditating-on-code.html</link>
@@ -50,6 +59,6 @@ We are going to use dmenu for input search queries and then instantly jump to th
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-06-09T07:16:41+03:00</dc:date>
+    <dc:date>2015-06-26T11:55:40+03:00</dc:date>
   </channel>
 </rss>
