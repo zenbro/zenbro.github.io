@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zenbro.github.io//2015/06/27/fix-broken-syntax-highlighting-for-git-commits-in-vim.html</loc>
+    <lastmod>2015-06-27T21:33:58+03:00</lastmod>
+  </url>
+  <url>
     <loc>https://zenbro.github.io//2015/06/26/review-last-commit-with-vim-and-fugitive.html</loc>
     <lastmod>2015-06-26T11:55:40+03:00</lastmod>
   </url>
