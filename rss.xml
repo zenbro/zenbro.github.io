@@ -8,7 +8,17 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Sat, 27 Jun 2015 21:33:58 +0300</pubDate>
+    <pubDate>Sun, 19 Jul 2015 17:55:01 +0300</pubDate>
+    <item>
+      <title>Simulate a Keypress in Vim</title>
+      <link>https://zenbro.github.io/2015/07/19/simulate-a-keypress-in-vim-insert-mode.html</link>
+      <description>&lt;p&gt;Once in an eternity you need to create a mapping that simulates a keypress.&lt;br&gt;
+Here comes the answer:&lt;br&gt;
+&lt;code&gt;:h feedkeys()&lt;/code&gt;&lt;/p&gt;
+</description>
+      <pubDate>Sun, 19 Jul 2015 17:55:01 +0300</pubDate>
+      <dc:date>2015-07-19T17:55:01+03:00</dc:date>
+    </item>
     <item>
       <title>Fix Broken Syntax Highlighting for Git Commits In Vim</title>
       <link>https://zenbro.github.io/2015/06/27/fix-broken-syntax-highlighting-for-git-commits-in-vim.html</link>
@@ -70,6 +80,6 @@ We are going to use dmenu for input search queries and then instantly jump to th
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-06-27T21:33:58+03:00</dc:date>
+    <dc:date>2015-07-19T17:55:01+03:00</dc:date>
   </channel>
 </rss>
