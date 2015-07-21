@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        
+            How to fix 'wxe_driver.so' error in Elixir
+        
+    </title>
+    <meta name="description" content="Fix &#39;wxe_driver.so&#39; error by installing full version of Erlang VM and wxWidgets library">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-63320478-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        </script>
+    
+</head>
+
+<body class="post-template">
+
+    
+
+
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+        <header class="post-header">
+            <h1 class="post-title">How to fix 'wxe_driver.so' error in Elixir</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-07-21">21 Jul 2015</time>
+                
+                    on
+                    
+                        <a href="/tag/elixir">elixir</a>,
+                    
+                        <a href="/tag/linux">linux</a>
+                    
+                
+
+                <span class="pull-right">1 minute read</span>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>If you trying to start an observer or debugger from iex (e.g.
+<code>:observer.start</code> or <code>:debugger.start</code>) and keep getting the following error:<br>
+<code>ERROR: Could not find &#39;wxe_driver.so&#39; in: /usr/lib/erlang/lib/wx-1.4/priv</code><br>
+then you probably have <em>erlang-nox</em> (headless version of Erlang VM) installed
+or doesn&#39;t have any <em>wxWidgets</em> library in your system.</p>
+
+<p>To fix this - just install <a href="https://www.erlang-solutions.com/downloads/download-erlang-otp">full version</a> of Erlang and any
+<a href="http://www.wxwidgets.org/downloads/">wxWidgets library</a> that fits your OS.</p>
+
+<p>If you are using Arch Linux, then you probably installed Elixir from
+<em>community/elixir</em> package which use <em>community/erlang-nox</em> as dependency.</p>
+
+<p>Install full version of Erlang which comes with <em>extra/wxgtk</em>:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># pacman -S erlang
+</code></pre></div>
+<p>And the error should gone.</p>
+
+<p><img src="/assets/images/posts/2015_07_21_iex_observer_start.png" alt="iex-observer-start"></p>
+
+        </section>
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Alexander Tsygankov's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Alexander Tsygankov </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I'm a full stack web developer from Russia who is passionate about his work. Sharpening tools is one of my hobbies and I love to write about useful things.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=How to fix 'wxe_driver.so' error in Elixir&amp;url=https://zenbro.github.io/2015/07/21/how-to-fix-wxe_driver-so-error-in-elixir.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/07/21/how-to-fix-wxe_driver-so-error-in-elixir.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/07/21/how-to-fix-wxe_driver-so-error-in-elixir.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            <section class="disqus">
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'zenbro';
+    var disqus_identifier = '/2015/07/21/how-to-fix-wxe_driver-so-error-in-elixir';
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</section>
+
+
+        </footer>
+    </article>
+</main>
+
+
+    <footer class="site-footer clearfix">
+    <section class="copyright">
+    <a href="/">Alexander Tsygankov</a> &copy;  2015
+    </section>
+    <section class="poweredby">Made with <a href="http://jekyllrb.com/">Jekyll</a>
+    </section>
+</footer>
+
+<script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+
+</body>
+</html>

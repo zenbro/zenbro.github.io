@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zenbro.github.io//2015/07/21/how-to-fix-wxe_driver-so-error-in-elixir.html</loc>
+    <lastmod>2015-07-21T10:37:55+03:00</lastmod>
+  </url>
+  <url>
     <loc>https://zenbro.github.io//2015/07/19/simulate-a-keypress-in-vim-insert-mode.html</loc>
     <lastmod>2015-07-19T17:55:01+03:00</lastmod>
   </url>

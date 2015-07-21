@@ -8,7 +8,19 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Sun, 19 Jul 2015 17:55:01 +0300</pubDate>
+    <pubDate>Tue, 21 Jul 2015 10:37:55 +0300</pubDate>
+    <item>
+      <title>How to fix 'wxe_driver.so' error in Elixir</title>
+      <link>https://zenbro.github.io/2015/07/21/how-to-fix-wxe_driver-so-error-in-elixir.html</link>
+      <description>&lt;p&gt;If you trying to start an observer or debugger from iex (e.g.
+&lt;code&gt;:observer.start&lt;/code&gt; or &lt;code&gt;:debugger.start&lt;/code&gt;) and keep getting the following error:&lt;br&gt;
+&lt;code&gt;ERROR: Could not find &amp;#39;wxe_driver.so&amp;#39; in: /usr/lib/erlang/lib/wx-1.4/priv&lt;/code&gt;&lt;br&gt;
+then you probably have &lt;em&gt;erlang-nox&lt;/em&gt; (headless version of Erlang VM) installed
+or doesn&amp;#39;t have any &lt;em&gt;wxWidgets&lt;/em&gt; library in your system.&lt;/p&gt;
+</description>
+      <pubDate>Tue, 21 Jul 2015 10:37:55 +0300</pubDate>
+      <dc:date>2015-07-21T10:37:55+03:00</dc:date>
+    </item>
     <item>
       <title>Simulate a Keypress in Vim</title>
       <link>https://zenbro.github.io/2015/07/19/simulate-a-keypress-in-vim-insert-mode.html</link>
@@ -80,6 +92,6 @@ We are going to use dmenu for input search queries and then instantly jump to th
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-07-19T17:55:01+03:00</dc:date>
+    <dc:date>2015-07-21T10:37:55+03:00</dc:date>
   </channel>
 </rss>
