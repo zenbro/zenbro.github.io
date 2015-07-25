@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        
+            Auto Change Keyboard Layout in Vim
+        
+    </title>
+    <meta name="description" content="Solving different problems that may be encountered when using Vim with multiple keyboard layouts.">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-63320478-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        </script>
+    
+</head>
+
+<body class="post-template">
+
+    
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+        <header class="post-header">
+            <h1 class="post-title">Auto Change Keyboard Layout in Vim</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-07-24">24 Jul 2015</time>
+                
+                    on
+                    
+                        <a href="/tag/vim">vim</a>,
+                    
+                        <a href="/tag/linux">linux</a>
+                    
+                
+
+                <span class="pull-right">2 minute read</span>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>If you use multiple keyboard layouts then you may know how it&#39;s frustrating to
+constanly switching between them. Remember that feeling when you come to Vim&#39;s
+<em>normal mode</em> with keyboard layout different than English? After some time of
+<code>hjkl</code>-ing, you find out that it doesn&#39;t work as expected. Let&#39;s solve this
+problem.</p>
+
+<!-- more -->
+
+<p>The most straightforward (and also the most rough) workaround is to duplicate
+your key mappings in different language. <code>langmap</code> can help here. You can
+explicitly specify all characters that should work in <em>normal mode</em> without
+layout switching.</p>
+
+<p>For Russian layout it should look like this:</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="k">set</span> <span class="nb">langmap</span><span class="p">=</span>ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;&#39;zxcvbnm\\<span class="p">,</span>.<span class="p">~</span>QWERTYUIOP{}ASDFGHJKL:\\&quot;ZXCVBNM<span class="p">&lt;&gt;</span>
+</code></pre></div>
+<p>More information can be found at <code>:h langmap</code>.</p>
+
+<p>I will not focus on this method, because there is a better way - <em>xkb-switch</em>.</p>
+
+<h2>xkb-switch</h2>
+
+<p><a href="https://github.com/ierton/xkb-switch">xkb-switch</a> is a C++ program that allows to query and change the XKB layout state.</p>
+
+<p>Usage is simple:</p>
+
+<ul>
+<li><code>xkb-switch -l</code> - show available keyboard layouts</li>
+<li><code>xkb-switch -s LAYOUT</code> - change current keyboard layout to LAYOUT</li>
+</ul>
+
+<p>How it can help us? Let&#39;s write a simple vim function, that changes layout
+to <code>us</code> (English).</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="k">function</span><span class="p">!</span> RestoreKeyboardLayout<span class="p">(</span><span class="nb">key</span><span class="p">)</span>
+  <span class="k">call</span> system<span class="p">(</span><span class="s1">&#39;xkb-switch -s us&#39;</span><span class="p">)</span>
+  execute <span class="s1">&#39;normal! &#39;</span> . <span class="k">a</span>:<span class="nb">key</span>
+<span class="k">endfunction</span>
+</code></pre></div>
+<p>Now we can map our <code>hjkl</code> (<code>ролд</code> in Russian layout) keys like this:</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="nb">nnoremap</span> <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> р :<span class="k">call</span> RestoreKeyboardLayout<span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">)&lt;</span>CR<span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> о :<span class="k">call</span> RestoreKeyboardLayout<span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">)&lt;</span>CR<span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> л :<span class="k">call</span> RestoreKeyboardLayout<span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)&lt;</span>CR<span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> д :<span class="k">call</span> RestoreKeyboardLayout<span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)&lt;</span>CR<span class="p">&gt;</span>
+</code></pre></div>
+<p>Pressing <code>hjkl</code> in different layout will implicitly switch it to English.
+Now you can forget about current keyboard layout when entering <em>normal mode</em>.</p>
+
+<p>But how about <em>insert mode</em>?</p>
+
+<h2>vim-xkbswitch</h2>
+
+<p><a href="https://github.com/lyokha/vim-xkbswitch">vim-xkbswitch</a> can be used to easily switch current keyboard layout back
+and forth when entering and leaving <em>insert mode</em>. It has a good documentation
+and should work out of the box. The only requirement is <em>xkb-switch</em>.</p>
+
+<p>It also support something like <code>langmap</code> for <em>insert mode</em>. This is example of
+mappings for Russian layout:</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="k">let</span> <span class="k">g</span>:XkbSwitchIMappingsTr <span class="p">=</span> {
+      \ <span class="s1">&#39;ru&#39;</span>:
+      \ {<span class="s1">&#39;&lt;&#39;</span>: <span class="s1">&#39;qwertyuiop[]asdfghjkl;&#39;&#39;zxcvbnm,.`/&#39;</span>.
+      \       <span class="s1">&#39;QWERTYUIOP{}ASDFGHJKL:&quot;ZXCVBNM&lt;&gt;?~@#$^&amp;|&#39;</span><span class="p">,</span>
+      \  <span class="s1">&#39;&gt;&#39;</span>: <span class="s1">&#39;йцукенгшщзхъфывапролджэячсмитьбюё.&#39;</span>.
+      \       <span class="s1">&#39;ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё&quot;№;:?/&#39;</span>}
+      \ }
+</code></pre></div>
+<p>And that is all about switching keyboard layouts in Vim.</p>
+
+        </section>
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Alexander Tsygankov's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Alexander Tsygankov </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I'm a full stack web developer from Russia who is passionate about his work. Sharpening tools is one of my hobbies and I love to write about useful things.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Auto Change Keyboard Layout in Vim&amp;url=https://zenbro.github.io/2015/07/24/auto-change-keyboard-layout-in-vim.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/07/24/auto-change-keyboard-layout-in-vim.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/07/24/auto-change-keyboard-layout-in-vim.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            <section class="disqus">
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'zenbro';
+    var disqus_identifier = '/2015/07/24/auto-change-keyboard-layout-in-vim';
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</section>
+
+
+        </footer>
+    </article>
+</main>
+
+
+    <footer class="site-footer clearfix">
+    <section class="copyright">
+    <a href="/">Alexander Tsygankov</a> &copy;  2015
+    </section>
+    <section class="poweredby">Made with <a href="http://jekyllrb.com/">Jekyll</a>
+    </section>
+</footer>
+
+<script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+
+</body>
+</html>

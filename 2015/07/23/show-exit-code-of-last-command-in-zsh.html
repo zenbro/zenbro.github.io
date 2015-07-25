@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        
+            Show Exit Code of Last Command in Zsh
+        
+    </title>
+    <meta name="description" content="Learning how to show exit code of last command in the shell prompt">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-63320478-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        </script>
+    
+</head>
+
+<body class="post-template">
+
+    
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+        <header class="post-header">
+            <h1 class="post-title">Show Exit Code of Last Command in Zsh</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-07-23">23 Jul 2015</time>
+                
+                    on
+                    
+                        <a href="/tag/zsh">zsh</a>,
+                    
+                        <a href="/tag/linux">linux</a>
+                    
+                
+
+                <span class="pull-right">1 minute read</span>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Recently I came across this <a href="https://asciinema.org/a/23012">ASCII cast</a>.
+My attention was caught by zsh configuration, that <a href='https://github.com/kui' class='user-mention'>@kui</a> is using. It prints
+exit code of last command before prompt:</p>
+
+<p><img src="/assets/images/posts/2015_07_23_kui_zsh_exit_code.png" alt="kui-zsh-exit-code"></p>
+
+<p>Let&#39;s look at the implementation.</p>
+
+<!-- more -->
+
+<p><a href="https://github.com/kui/dotfiles/blob/master/dotfiles/zshrc#L411-L413">https://github.com/kui/dotfiles/blob/master/dotfiles/zshrc#L411-L413</a></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">...
+<span class="nv">user</span><span class="o">=</span><span class="s2">&quot;%F{$(color_code_from_str &quot;</span><span class="nv">$USER</span><span class="s2">&quot;)}%n&quot;</span>
+<span class="nv">host</span><span class="o">=</span><span class="s2">&quot;%F{$(color_code_from_str &quot;</span><span class="nv">$HOST</span><span class="s2">&quot;)}%m&quot;</span>
+<span class="nv">PROMPT</span><span class="o">=</span><span class="s1">&#39;%(?.%F{243}.%F{red})%U${(l:COLUMNS:: :)?}%u</span>
+<span class="s1">&#39;</span><span class="s2">&quot;$user&quot;</span><span class="s1">&#39;%f@&#39;</span><span class="s2">&quot;$host&quot;</span><span class="s1">&#39;%f:%F{yellow}%~ $(for f in &quot;${prompt_opts[@]}&quot;; &quot;$f&quot;)</span>
+<span class="s1">%(?.%f.%F{red})%(!.#.$)%f &#39;</span>
+...
+</code></pre></div>
+<p>Zsh has two prompts: default - <code>PROMPT</code> and the right prompt <code>RPROMPT</code>.
+The code above constructs default prompt using multiple pieces of data such
+as <code>$USER</code> and <code>$HOST</code> environment variables.</p>
+
+<p>Let&#39;s look more closely at this:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">%U${(l:COLUMNS:: :)?}%u
+</code></pre></div>
+<ul>
+<li><code>$U</code> - anchor for starting underlined text.</li>
+<li><code>(l:COLUMNS:: :)</code> - pads the left side of the parameter with spaces (given
+between the last two <code>: :</code>) until a width of $COLUMNS is reached.</li>
+<li><code>?</code> - in context of <code>${...}</code> is equalent to <code>$?</code> - a shell variable that
+store exit status code of last command.</li>
+<li><code>%u</code> - the end of underlined text.</li>
+</ul>
+
+<p>That&#39;s how it works. More about this can be found here:</p>
+
+<ul>
+<li><a href="http://superuser.com/questions/845744/how-to-draw-a-line-between-commands-in-zsh-shell">How to draw a line between commands in zsh shell?</a></li>
+</ul>
+
+<p>I don&#39;t want to draw this line everytime, so I used a different approach:</p>
+
+<p><img src="/assets/images/posts/2015_07_23_my_zsh_exit_code.png" alt="my-zsh-exit-code"></p>
+
+<p>The exit code is displayed in right prompt only when it differs from zero
+(<em>0</em> - a code for successful exit).</p>
+
+<p>Here is the implementation from <code>.zshrc</code>:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">...
+<span class="k">function</span> check_last_exit_code<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local </span><span class="nv">LAST_EXIT_CODE</span><span class="o">=</span><span class="nv">$?</span>
+  <span class="k">if</span> <span class="o">[[</span> <span class="nv">$LAST_EXIT_CODE</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">local </span><span class="nv">EXIT_CODE_PROMPT</span><span class="o">=</span><span class="s1">&#39; &#39;</span>
+    EXIT_CODE_PROMPT+<span class="o">=</span><span class="s2">&quot;%{$fg[red]%}-%{$reset_color%}&quot;</span>
+    EXIT_CODE_PROMPT+<span class="o">=</span><span class="s2">&quot;%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}&quot;</span>
+    EXIT_CODE_PROMPT+<span class="o">=</span><span class="s2">&quot;%{$fg[red]%}-%{$reset_color%}&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;$EXIT_CODE_PROMPT&quot;</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+...
+<span class="nv">RPROMPT</span><span class="o">=</span><span class="s1">&#39;$(check_last_exit_code)$(git_prompt_string)&#39;</span>
+...
+</code></pre></div>
+        </section>
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Alexander Tsygankov's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Alexander Tsygankov </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I'm a full stack web developer from Russia who is passionate about his work. Sharpening tools is one of my hobbies and I love to write about useful things.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Show Exit Code of Last Command in Zsh&amp;url=https://zenbro.github.io/2015/07/23/show-exit-code-of-last-command-in-zsh.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/07/23/show-exit-code-of-last-command-in-zsh.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/07/23/show-exit-code-of-last-command-in-zsh.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            <section class="disqus">
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'zenbro';
+    var disqus_identifier = '/2015/07/23/show-exit-code-of-last-command-in-zsh';
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</section>
+
+
+        </footer>
+    </article>
+</main>
+
+
+    <footer class="site-footer clearfix">
+    <section class="copyright">
+    <a href="/">Alexander Tsygankov</a> &copy;  2015
+    </section>
+    <section class="poweredby">Made with <a href="http://jekyllrb.com/">Jekyll</a>
+    </section>
+</footer>
+
+<script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+
+</body>
+</html>

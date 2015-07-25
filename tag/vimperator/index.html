@@ -63,6 +63,9 @@
         </header>
         <section class="post-excerpt">
             <p>Lets add new command for sending page to your Kindle via Vimperator console (it uses <a href="http://fivefilters.org/">fivefilters</a> API):</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim">command kindle :javascript openURL<span class="p">(</span><span class="s1">&#39;http://fivefilters.org/kindle-it/send.php?url=&#39;</span> <span class="p">+</span> encodeURI<span class="p">(</span>liberator.modules.buffer.URL<span class="p">))</span>
+</code></pre></div>
+<p>Add this line to your <em>.vimperatorrc</em>, open any page and type <code>:kindle</code></p>
  <a class="read-more" href="/2015/06/06/sending-page-to-kindle-from-vimperator.html">&raquo;</a>
         </section>
         <footer class="post-meta">

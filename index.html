@@ -58,10 +58,72 @@
     <div class="extra-pagination inner">
         <nav class="pagination" role="pagination">
     
-    <span class="page-number"> Page 1 of 1 </span>
+    <span class="page-number"> Page 1 of 2 </span>
+     
+        <a class="older-posts" href="/page2/" title="Next Page">Older Posts &raquo;</a>
      
 </nav>
     </div>
+
+    
+
+    <article class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="/2015/07/24/auto-change-keyboard-layout-in-vim.html">Auto Change Keyboard Layout in Vim</a></h2>
+        </header>
+        <section class="post-excerpt">
+            <p>If you use multiple keyboard layouts then you may know how it&#39;s frustrating to
+constanly switching between them. Remember that feeling when you come to Vim&#39;s
+<em>normal mode</em> with keyboard layout different than English? After some time of
+<code>hjkl</code>-ing, you find out that it doesn&#39;t work as expected. Let&#39;s solve this
+problem.</p>
+ <a class="read-more" href="/2015/07/24/auto-change-keyboard-layout-in-vim.html">&raquo;</a>
+        </section>
+        <footer class="post-meta">
+            
+                on
+                
+                    <a href="/tag/vim">vim</a>,
+                
+                    <a href="/tag/linux">linux</a>
+                
+            
+            <time class="post-date" datetime="2015-07-24">
+                24 Jul 2015
+            </time> 
+        </footer>
+    </article>
+
+    
+
+    <article class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="/2015/07/23/show-exit-code-of-last-command-in-zsh.html">Show Exit Code of Last Command in Zsh</a></h2>
+        </header>
+        <section class="post-excerpt">
+            <p>Recently I came across this <a href="https://asciinema.org/a/23012">ASCII cast</a>.
+My attention was caught by zsh configuration, that @kui is using. It prints
+exit code of last command before prompt:</p>
+
+<p><img src="/assets/images/posts/2015_07_23_kui_zsh_exit_code.png" alt="kui-zsh-exit-code"></p>
+
+<p>Let&#39;s look at the implementation.</p>
+ <a class="read-more" href="/2015/07/23/show-exit-code-of-last-command-in-zsh.html">&raquo;</a>
+        </section>
+        <footer class="post-meta">
+            
+                on
+                
+                    <a href="/tag/zsh">zsh</a>,
+                
+                    <a href="/tag/linux">linux</a>
+                
+            
+            <time class="post-date" datetime="2015-07-23">
+                23 Jul 2015
+            </time> 
+        </footer>
+    </article>
 
     
 
@@ -176,7 +238,8 @@ made in last commit before push them to origin.</p>
             <h2 class="post-title"><a href="/2015/06/09/meditating-on-code.html">Meditating on Code</a></h2>
         </header>
         <section class="post-excerpt">
-            <p>Sometimes you need to gather all your attention and focus on a few lines of code. Vim has a great plugin which can help you minimize distractions.</p>
+            <p>Sometimes you need to gather all your attention and focus on a few lines of
+code. Vim has a great plugin which can help you minimize distractions.</p>
  <a class="read-more" href="/2015/06/09/meditating-on-code.html">&raquo;</a>
         </section>
         <footer class="post-meta">
@@ -202,6 +265,9 @@ made in last commit before push them to origin.</p>
         </header>
         <section class="post-excerpt">
             <p>Lets add new command for sending page to your Kindle via Vimperator console (it uses <a href="http://fivefilters.org/">fivefilters</a> API):</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim">command kindle :javascript openURL<span class="p">(</span><span class="s1">&#39;http://fivefilters.org/kindle-it/send.php?url=&#39;</span> <span class="p">+</span> encodeURI<span class="p">(</span>liberator.modules.buffer.URL<span class="p">))</span>
+</code></pre></div>
+<p>Add this line to your <em>.vimperatorrc</em>, open any page and type <code>:kindle</code></p>
  <a class="read-more" href="/2015/06/06/sending-page-to-kindle-from-vimperator.html">&raquo;</a>
         </section>
         <footer class="post-meta">
@@ -224,7 +290,9 @@ made in last commit before push them to origin.</p>
             <h2 class="post-title"><a href="/2015/06/01/jumping-between-most-recently-used-files-and-directories.html">Jumping Between Most Recently Used Files and Directories</a></h2>
         </header>
         <section class="post-excerpt">
-            <p><a href="https://github.com/junegunn/fzf">fzf</a> is one of these life-changing tools that can boost your productivity. Here is example of using <em>fzf</em> with vim history for quickly (less than 500 ms) opening files and jumping between directories.</p>
+            <p><a href="https://github.com/junegunn/fzf">fzf</a> is one of these life-changing tools that
+can boost your productivity. Here is example of using <em>fzf</em> with vim history
+for quickly (less than 500 ms) opening files and jumping between directories.</p>
  <a class="read-more" href="/2015/06/01/jumping-between-most-recently-used-files-and-directories.html">&raquo;</a>
         </section>
         <footer class="post-meta">
@@ -274,27 +342,11 @@ We are going to use dmenu for input search queries and then instantly jump to th
 
     
 
-    <article class="post">
-        <header class="post-header">
-            <h2 class="post-title"><a href="/2015/05/23/a-new-beginning.html">A New Beginning</a></h2>
-        </header>
-        <section class="post-excerpt">
-            <p>This is my second attempt on blogging and this time most of the posts will be in english (need more practice with this, but I&#39;ll do my best).</p>
- <a class="read-more" href="/2015/05/23/a-new-beginning.html">&raquo;</a>
-        </section>
-        <footer class="post-meta">
-            
-            <time class="post-date" datetime="2015-05-23">
-                23 May 2015
-            </time> 
-        </footer>
-    </article>
-
-    
-
     <nav class="pagination" role="pagination">
     
-    <span class="page-number"> Page 1 of 1 </span>
+    <span class="page-number"> Page 1 of 2 </span>
+     
+        <a class="older-posts" href="/page2/" title="Next Page">Older Posts &raquo;</a>
      
 </nav>
 </main>
