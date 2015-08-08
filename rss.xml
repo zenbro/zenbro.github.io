@@ -8,7 +8,18 @@
     <title>zenbro</title>
     <link>https://zenbro.github.io</link>
     <description>on contributing to the world</description>
-    <pubDate>Fri, 24 Jul 2015 19:36:27 +0300</pubDate>
+    <pubDate>Sat, 08 Aug 2015 05:17:38 +0300</pubDate>
+    <item>
+      <title>Overriding Default Vim-test Strategies</title>
+      <link>https://zenbro.github.io/2015/08/08/overriding-default-vim-test-strategies.html</link>
+      <description>&lt;p&gt;&lt;a href=&quot;https://github.com/janko-m/vim-test&quot;&gt;vim-test&lt;/a&gt; can help you to turn a process of running tests into pleasure.
+It has multiple &lt;a href=&quot;https://github.com/janko-m/vim-test#strategies&quot;&gt;strategies&lt;/a&gt; for tests execution:  basic, dispatch, tmux, neovim
+terminal, etc. Each strategy is hardcoded inside
+&lt;em&gt;vim-test/autoload/test/strategy.vim&lt;/em&gt;, but we can easily override any of them.&lt;/p&gt;
+</description>
+      <pubDate>Sat, 08 Aug 2015 05:17:38 +0300</pubDate>
+      <dc:date>2015-08-08T05:17:38+03:00</dc:date>
+    </item>
     <item>
       <title>Auto Change Keyboard Layout in Vim</title>
       <link>https://zenbro.github.io/2015/07/24/auto-change-keyboard-layout-in-vim.html</link>
@@ -125,6 +136,6 @@ be in english (need more practice with this, but I&amp;#39;ll do my best).&lt;/p
       <pubDate>Sat, 23 May 2015 00:00:00 +0300</pubDate>
       <dc:date>2015-05-23T00:00:00+03:00</dc:date>
     </item>
-    <dc:date>2015-07-24T19:36:27+03:00</dc:date>
+    <dc:date>2015-08-08T05:17:38+03:00</dc:date>
   </channel>
 </rss>

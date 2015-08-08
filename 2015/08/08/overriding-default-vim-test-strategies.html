@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        
+            Overriding Default Vim-test Strategies
+        
+    </title>
+    <meta name="description" content="Overriding neovim strategy for vim-test">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+    
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-63320478-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        </script>
+    
+</head>
+
+<body class="post-template">
+
+    
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+        <header class="post-header">
+            <h1 class="post-title">Overriding Default Vim-test Strategies</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-08-08">08 Aug 2015</time>
+                
+                    on
+                    
+                        <a href="/tag/vim">vim</a>
+                    
+                
+
+                <span class="pull-right">1 minute read</span>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p><a href="https://github.com/janko-m/vim-test">vim-test</a> can help you to turn a process of running tests into pleasure.
+It has multiple <a href="https://github.com/janko-m/vim-test#strategies">strategies</a> for tests execution:  basic, dispatch, tmux, neovim
+terminal, etc. Each strategy is hardcoded inside
+<em>vim-test/autoload/test/strategy.vim</em>, but we can easily override any of them.</p>
+
+<!-- more -->
+
+<p>If you are using <em>neovim</em>, then you probably want to take full advantage of its
+embedded terminal. By default neovim strategy for test execution will open new
+terminal buffer with command <code>enew</code> and start insert mode.</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="k">function</span><span class="p">!</span> test#strategy#neovim<span class="p">(</span>cmd<span class="p">)</span> abort
+  <span class="k">enew</span> <span class="p">|</span> <span class="k">call</span> termopen<span class="p">(</span><span class="k">a</span>:cmd<span class="p">)</span> <span class="p">|</span> startinsert
+<span class="k">endfunction</span>
+</code></pre></div>
+<p>However, it takes over the active split and, upon test completion, the terminal
+and the split get closed (issue <a href="https://github.com/janko-m/vim-test/issues/25">#25</a>):</p>
+
+<p><a href="https://asciinema.org/a/24724"><img src="https://asciinema.org/a/24724.png" alt="asciicast"></a></p>
+
+<p>To override this strategy we need to move <code>test#strategy#neovim</code> function into
+<em>.vimrc</em> (<em>.nvimrc</em>) and place it right after the end of plugins initialization:</p>
+
+<ul>
+<li><a href="https://github.com/junegunn/vim-plug">vim-plug</a>: <code>call plug#end()</code></li>
+<li><a href="https://github.com/Shougo/neobundle.vim">NeoBundle</a>: <code>call neobundle#end()</code></li>
+<li><a href="https://github.com/VundleVim/Vundle.vim">Vundle</a>: <code>call vundle#end()</code></li>
+</ul>
+
+<p>I use vim-plug and override neovim strategy for opening new horizontal split
+with terminal:</p>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim">...
+<span class="k">call</span> plug#<span class="k">end</span><span class="p">()</span> <span class="c">&quot; plugins initialization finished</span>
+
+<span class="c">&quot; Custom neovim strategy for vim-test</span>
+<span class="k">function</span><span class="p">!</span> test#strategy#neovim<span class="p">(</span>cmd<span class="p">)</span> abort
+  <span class="k">botright</span> <span class="k">new</span> <span class="p">|</span> <span class="k">call</span> termopen<span class="p">(</span><span class="k">a</span>:cmd<span class="p">)</span> <span class="p">|</span> startinsert
+<span class="k">endfunction</span>
+</code></pre></div>
+<p>When <code>!</code> is used inside <code>function!</code> definition then an existing function will
+be silently replaced.</p>
+
+<p>That&#39;s how overrided strategy works:</p>
+
+<p><a href="https://asciinema.org/a/5hcjnl9yvzzw8km9m6fv5itr6"><img src="https://asciinema.org/a/5hcjnl9yvzzw8km9m6fv5itr6.png" alt="asciicast"></a></p>
+
+<p>Any strategy from <em>vim-test/autoload/test/strategy.vim</em> can be overrided this
+way.</p>
+
+        </section>
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="https://github.com/zenbro" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Alexander Tsygankov's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Alexander Tsygankov </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I'm a full stack web developer from Russia who is passionate about his work. Sharpening tools is one of my hobbies and I love to write about useful things.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Overriding Default Vim-test Strategies&amp;url=https://zenbro.github.io/2015/08/08/overriding-default-vim-test-strategies.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://zenbro.github.io/2015/08/08/overriding-default-vim-test-strategies.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://zenbro.github.io/2015/08/08/overriding-default-vim-test-strategies.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            <section class="disqus">
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'zenbro';
+    var disqus_url = 'https://zenbro.github.io/2015/08/08/overriding-default-vim-test-strategies.html';
+    var disqus_identifier = '/2015/08/08/overriding-default-vim-test-strategies';
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</section>
+
+
+        </footer>
+    </article>
+</main>
+
+
+    <footer class="site-footer clearfix">
+    <section class="copyright">
+    <a href="/">Alexander Tsygankov</a> &copy;  2015
+    </section>
+    <section class="poweredby">Made with <a href="http://jekyllrb.com/">Jekyll</a>
+    </section>
+</footer>
+
+<script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+
+</body>
+</html>
